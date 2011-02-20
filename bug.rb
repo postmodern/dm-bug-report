@@ -21,6 +21,7 @@ end
 require 'dm-core'
 require 'dm-validations'
 require 'dm-migrations'
+require 'pp'
 
 class User
 
