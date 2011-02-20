@@ -8,9 +8,17 @@ buggy code to `test.rb`.
 
 ## Usage
 
-Install the dependencies.
+Install DataMapper dependencies:
 
     $ bundle install
+
+Install DataMapper edge dependencies:
+
+    $ DM_EDGE=true bundle install
+
+Install a specific DataMapper Adapter:
+
+    $ DM_ADAPTER=mysql bundle install
 
 Run the test script.
 
