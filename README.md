@@ -22,5 +22,5 @@ Install a specific DataMapper Adapter:
 
 Run the test script.
 
-    $ bundle exec ruby test.rb
+    $ ./bug.rb
 
