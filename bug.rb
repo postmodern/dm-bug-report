@@ -70,4 +70,6 @@ end
 DataMapper.setup(:default, 'sqlite:bug.db')
 DataMapper.finalize.auto_migrate!
 
-# bug code here
+# ****************************** BUGGY CODE ******************************
+
+# ****************************** BUGGY CODE ******************************
