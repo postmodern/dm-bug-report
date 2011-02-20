@@ -68,6 +68,6 @@ class Comment
 end
 
 DataMapper.setup(:default, 'sqlite:bug.db')
-DataMapper.auto_migrate!
+DataMapper.finalize.auto_migrate!
 
 # bug code here
