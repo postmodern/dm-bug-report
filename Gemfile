@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source :rubygems
 
 DM_VERSION = '~> 1.0.0'
 
