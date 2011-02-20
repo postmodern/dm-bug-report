@@ -3,12 +3,27 @@ source :rubygems
 DM_URI = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0.0'
 
-gem 'dm-sqlite-adapter',	DM_VERSION
-#gem 'dm-mysql-adapter',	DM_VERSION
-#gem 'dm-postgres-adapter',	DM_VERSION
+def dm_gem(name)
+  options = {}
 
-gem 'dm-core',		DM_VERSION
-gem 'dm-migrations',	DM_VERSION
-gem 'dm-validations',	DM_VERSION
-#gem 'dm-constraints',	DM_VERSION
-#gem 'dm-aggregates',	DM_VERSION
+  if ENV['DM_EDGE']
+    options[:git] = "#{DM_URI}/#{name}.git"
+  end
+
+  gem(name,DM_VERSION,options)
+end
+
+case ENV['DM_ADAPTER']
+when /mysql/i
+  dm_gem 'dm-mysql-adapter'
+when /postgre/i
+  dm_gem 'dm-postgres-adapter'
+else
+  dm_gem 'dm-sqlite-adapter'
+end
+
+dm_gem 'dm-core'
+dm_gem 'dm-migrations'
+dm_gem 'dm-validations'
+#dm_gem 'dm-constraints'
+#dm_gem 'dm-aggregates'
