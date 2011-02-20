@@ -1,5 +1,6 @@
 source :rubygems
 
+DM_URI = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0.0'
 
 gem 'dm-sqlite-adapter',	DM_VERSION
