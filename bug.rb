@@ -23,13 +23,20 @@ require 'dm-validations'
 require 'dm-migrations'
 require 'pp'
 
+module HasName
+  def self.included(base)
+    base.module_eval do
+      property :name, String, :required => true
+    end
+  end
+end
+
 class User
 
   include DataMapper::Resource
+  include HasName
 
   property :id, Serial
-
-  property :name, String, :required => true
 
   has 0..n, :posts
 
@@ -71,5 +78,13 @@ DataMapper.setup(:default, 'sqlite:bug.db')
 DataMapper.finalize.auto_migrate!
 
 # ****************************** BUGGY CODE ******************************
+
+User.create(:name => 'bob')
+
+puts 'Works: :name.like'
+p User.all(:name.like => '%bob%')
+
+puts 'Fails: "name.like"'
+p User.all('name.like' => '%bob%')
 
 # ****************************** BUGGY CODE ******************************
