@@ -51,6 +51,10 @@ class Post
 
   belongs_to :user
 
+  def self.titled(name)
+    all(:title => name)
+  end
+
 end
 
 class Comment
@@ -71,5 +75,17 @@ DataMapper.setup(:default, 'sqlite:bug.db')
 DataMapper.finalize.auto_migrate!
 
 # ****************************** BUGGY CODE ******************************
+
+user = User.new(:name => 'bob')
+user.posts.new(:title => 'foo bar', :body => 'Foo Bar')
+
+p user.posts.titled('foo bar')
+#
+# Expected:
+#   [#<Post: @title="foo bar">]
+#
+# Actual:
+#   []
+#
 
 # ****************************** BUGGY CODE ******************************
