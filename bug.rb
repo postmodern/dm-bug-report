@@ -33,7 +33,7 @@ class User
 
   has 0..n, :posts
 
-  has 0..n, :comments
+  has 0..n, :comments, :through => :posts #, :model => 'NameSpace::Comment'
 
 end
 
@@ -47,24 +47,24 @@ class Post
 
   property :body, Text
 
-  has 0..n, :comments
+  has 0..n, :comments, :model => 'NameSpace::Comment'
 
   belongs_to :user
 
 end
 
-class Comment
+module NameSpace
+  class Comment
 
-  include DataMapper::Resource
+    include DataMapper::Resource
 
-  property :id, Serial
+    property :id, Serial
 
-  property :body, Text
+    property :body, Text
 
-  belongs_to :post
+    belongs_to :post
 
-  belongs_to :user
-
+  end
 end
 
 DataMapper.setup(:default, 'sqlite:bug.db')
