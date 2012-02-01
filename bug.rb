@@ -21,6 +21,7 @@ end
 require 'dm-core'
 require 'dm-validations'
 require 'dm-migrations'
+require 'dm-aggregates'
 require 'pp'
 
 class User
@@ -49,6 +50,10 @@ class Post
 
   has 0..n, :comments
 
+  has 0..n, :commenting_users, :through => :comments,
+                               :via     => :user,
+                               :model   => User
+
   belongs_to :user
 
 end
@@ -67,9 +72,36 @@ class Comment
 
 end
 
+DataMapper::Logger.new(STDERR,:debug) if ENV['DEBUG']
 DataMapper.setup(:default, 'sqlite:bug.db')
 DataMapper.finalize.auto_migrate!
 
+user1 = User.create(:name => 'bob')
+user2 = User.create(:name => 'joe')
+
+post = Post.new(:title =>'test', :body => 'This is a test', :user => user1)
+post.comments.new(:body => 'one', :user => user1)
+post.comments.new(:body => 'two', :user => user2)
+post.comments.new(:body => 'one', :user => user1)
+post.comments.new(:body => 'two', :user => user2)
+post.comments.new(:body => 'one', :user => user1)
+post.comments.new(:body => 'two', :user => user2)
+post.comments.new(:body => 'one', :user => user1)
+post.comments.new(:body => 'two', :user => user2)
+
+post.save
+post = Post.first
+
 # ****************************** BUGGY CODE ******************************
+
+puts "[ relationship chaining ]"
+
+puts "  count: #{post.comments.users.count}"
+puts "  length: #{post.comments.users.length}"
+
+puts "[ has n, :through ]"
+
+puts "  count: #{post.commenting_users.count}"
+puts "  length: #{post.commenting_users.length}"
 
 # ****************************** BUGGY CODE ******************************
