@@ -67,6 +67,7 @@ class Comment
 
 end
 
+DataMapper::Logger.new(STDERR,:debug) if ENV['DEBUG']
 DataMapper.setup(:default, 'sqlite:bug.db')
 DataMapper.finalize.auto_migrate!
 
