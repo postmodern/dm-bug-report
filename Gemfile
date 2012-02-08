@@ -1,7 +1,7 @@
 source :rubygems
 
 DM_URI = 'http://github.com/datamapper'
-DM_VERSION = '~> 1.0'
+DM_VERSION = '1.3.0.beta'
 
 def dm_gem(name)
   options = {}
@@ -27,6 +27,7 @@ else
 end
 
 dm_gem 'dm-core'
+dm_gem 'dm-types'
 dm_gem 'dm-migrations'
 dm_gem 'dm-validations'
 #dm_gem 'dm-types'

@@ -19,6 +19,7 @@ rescue Bundler::BundlerError => e
 end
 
 require 'dm-core'
+require 'dm-types'
 require 'dm-validations'
 require 'dm-migrations'
 #require 'dm-types'
@@ -33,6 +34,8 @@ class User
   property :id, Serial
 
   property :name, String, :required => true
+
+  property :sign_in_ip, IPAddress
 
   has 0..n, :posts
 
@@ -74,6 +77,11 @@ DataMapper::Logger.new(STDERR,:debug) if ENV['DEBUG']
 DataMapper.setup(:default, 'sqlite:bug.db')
 DataMapper.finalize.auto_migrate!
 
+User.create(:name => 'bob', :sign_in_ip => '192.168.1.2')
+User.create(:name => 'jim', :sign_in_ip => '10.1.1.2')
+
 # ****************************** BUGGY CODE ******************************
+
+p User.all(:sign_in_ip.like => '%192.168.%')
 
 # ****************************** BUGGY CODE ******************************
