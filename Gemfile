@@ -13,6 +13,8 @@ def dm_gem(name)
   gem(name,DM_VERSION,options)
 end
 
+dm_gem 'dm-do-adapter'
+
 case ENV['DM_ADAPTER']
 when /mysql/i
   dm_gem 'dm-mysql-adapter'
