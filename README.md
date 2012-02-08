@@ -12,9 +12,13 @@ Install DataMapper dependencies:
 
     $ bundle install
 
-Install DataMapper edge dependencies:
+Install DataMapper Edge dependencies:
 
     $ DM_EDGE=true bundle install
+
+Use existing DataMapper repositories from a root directory:
+
+    $ DM_ROOT=~/src/dm/ bundle install
 
 Install a specific DataMapper Adapter:
 

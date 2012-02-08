@@ -6,6 +6,8 @@ DM_VERSION = '~> 1.0'
 def dm_gem(name)
   options = {}
 
+  if ENV['DM_ROOT']
+    options[:path] = "#{ENV['DM_ROOT']}/#{name}"
   if ENV['DM_EDGE']
     options[:git] = "#{DM_URI}/#{name}.git"
   end
