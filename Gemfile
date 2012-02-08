@@ -8,7 +8,7 @@ def dm_gem(name)
 
   if ENV['DM_ROOT']
     options[:path] = "#{ENV['DM_ROOT']}/#{name}"
-  if ENV['DM_EDGE']
+  elsif ENV['DM_EDGE']
     options[:git] = "#{DM_URI}/#{name}.git"
   end
 
