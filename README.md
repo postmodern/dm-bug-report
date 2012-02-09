@@ -22,7 +22,7 @@ Use existing DataMapper repositories from a root directory:
 
 Install a specific DataMapper Adapter:
 
-    $ DM_ADAPTER=mysql bundle install
+    $ ADAPTER=mysql bundle install
 
 Run the test script.
 

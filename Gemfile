@@ -17,7 +17,7 @@ end
 
 dm_gem 'dm-do-adapter'
 
-case ENV['DM_ADAPTER']
+case ENV['ADAPTER']
 when /mysql/i
   dm_gem 'dm-mysql-adapter'
 when /postgre/i
