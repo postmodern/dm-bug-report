@@ -19,6 +19,7 @@ rescue Bundler::BundlerError => e
 end
 
 require 'dm-core'
+require 'dm-types'
 require 'dm-validations'
 require 'dm-migrations'
 require 'pp'
@@ -30,6 +31,8 @@ class User
   property :id, Serial
 
   property :name, String, :required => true
+
+  property :gender, Enum[:undisclosed, :male, :female]
 
   has 0..n, :posts
 
@@ -71,5 +74,11 @@ DataMapper.setup(:default, 'sqlite:bug.db')
 DataMapper.finalize.auto_migrate!
 
 # ****************************** BUGGY CODE ******************************
+
+User.create(:name => 'bob', :gender => :male)
+User.create(:name => 'alice', :gender => :female)
+
+p User.get(1)
+p User.get(2)
 
 # ****************************** BUGGY CODE ******************************
