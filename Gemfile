@@ -1,29 +1,24 @@
-source :rubygems
+source 'https://rubygems.org/'
 
-DM_URI = 'http://github.com/datamapper'
+DM_URI     = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0'
 
 def dm_gem(name)
   options = {}
 
-  if ENV['DM_ROOT']
-    options[:path] = "#{ENV['DM_ROOT']}/#{name}"
-  elsif ENV['DM_EDGE']
-    options[:git] = "#{DM_URI}/#{name}.git"
+  if ENV['DM_ROOT']    then options[:path] = "#{ENV['DM_ROOT']}/#{name}"
+  elsif ENV['DM_EDGE'] then options[:git]  = "#{DM_URI}/#{name}.git"
   end
 
-  gem(name,DM_VERSION,options)
+  gem name, DM_VERSION, options
 end
 
 dm_gem 'dm-do-adapter'
 
 case ENV['ADAPTER']
-when /mysql/i
-  dm_gem 'dm-mysql-adapter'
-when /postgre/i
-  dm_gem 'dm-postgres-adapter'
-else
-  dm_gem 'dm-sqlite-adapter'
+when /mysql/i   then dm_gem 'dm-mysql-adapter'
+when /postgre/i then dm_gem 'dm-postgres-adapter'
+else                 dm_gem 'dm-sqlite-adapter'
 end
 
 dm_gem 'dm-core'
